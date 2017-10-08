@@ -1,44 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <title>DRAR - Disaster Relief and Recovery</title>
+  <title>Resilience - Disaster Relief and Recovery</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="css/modern-business.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="css/modern-business.css" rel="stylesheet">
 
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <!-- Navigation -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">D.R.A.R.</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
+  <!-- Navigation -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">Resilience</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/rebuilding">Rebuilding</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/preparation">Preparation</a>
             <li class="nav-item">
-              <a class="nav-link" href="about.html">About</a>
+              <a class="nav-link" href="/contact">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="contracting.html">Rebuilding</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="preparation.html">Preparation</a>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
+              <a class="nav-link" href="/services">Services</a>
             </li>
           </ul>
         </div>
@@ -95,7 +98,7 @@
         </style>
       </div> -->
       <div id="map" style="width:100%;height:100%;"></div>
-    <script>
+      <script>
       // Note: This example requires that you consent to location sharing when
       // prompted by your browser. If you see the error "The Geolocation service
       // failed.", it means you probably did not give permission for the browser to
@@ -133,20 +136,20 @@
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
+          'Error: The Geolocation service failed.' :
+          'Error: Your browser doesn\'t support geolocation.');
         infoWindow.open(map);
       }
 
       function findLocalHospitals(map, pos) {
-          var request = {
-            location: pos,
-            radius: 2500,
-            types: ['hospital']
-          };
-          infowindow = new google.maps.InfoWindow();
-          var service = new google.maps.places.PlacesService(map);
-          service.nearbySearch(request, callback);
+        var request = {
+          location: pos,
+          radius: 2500,
+          types: ['hospital']
+        };
+        infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch(request, callback);
           // displayDetailsofMarkers(service);
         }
 
@@ -185,22 +188,22 @@
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACARV4cJkUBAws0ee0iA-vlr1l-H7h2V8&callback=initMap&libraries=places"></script>
 
 
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
     </div>
     <!-- /.container -->
+  </footer>
 
-    <!-- Footer -->
-    <footer class="py-5 bg-dark">
-      <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
-      </div>
-      <!-- /.container -->
-    </footer>
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/popper/popper.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/popper/popper.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-  </body>
+</body>
 
 </html>

@@ -1,59 +1,54 @@
-#![feature(plugin)]
+#![feature(plugin, decl_macro)]
 #![plugin(rocket_codegen)]
 
-extern crate rocket_contrib;
 extern crate rocket;
-#[macro_use] extern crate serde_derive;
 
-#[cfg(test)] mod tests;
+#[cfg(test)]
+mod tests;
 
-use rocket::Request;
-use rocket::response::Redirect;
-use rocket_contrib::Template;
+use std::io;
+use std::path::{Path, PathBuf};
 
-#[derive(Serialize)]
-struct TemplateContext {
-    name: String,
-    items: Vec<String>
-}
+use rocket::response::NamedFile;
 
 #[get("/")]
-fn index() -> Redirect {
-    Redirect::to("/hello/Unknown")
+fn index() -> io::Result<NamedFile> {
+    NamedFile::open("static/index.html")
 }
 
-#[get("/hello/<name>")]
-fn hello(name: String) -> Template {
-    let context = TemplateContext {
-        name: name,
-        items: vec!["One", "Two", "Three"].iter().map(|s| s.to_string()).collect()
-    };
-
-    Template::render("index", &context)
-}
- 	
-#[get("/map")]
-fn map() -> Template {
-    let context = TemplateContext {
-        name: String::from("Test"),
-        items: vec!["One", "Two", "Three"].iter().map(|s| s.to_string()).collect()
-    };
-
-    Template::render("mapCL", &context)
+#[get("/about")]
+fn about() -> io::Result<NamedFile> {
+    NamedFile::open("static/about.html")
 }
 
-#[error(404)]
-fn not_found(req: &Request) -> Template {
-    let mut map = std::collections::HashMap::new();
-    map.insert("path", req.uri().as_str());
-    Template::render("error/404", &map)
+#[get("/rebuilding")]
+fn rebuilding() -> io::Result<NamedFile> {
+    NamedFile::open("static/contracting.html")
 }
+
+#[get("/preparation")]
+fn preparation() -> io::Result<NamedFile> {
+    NamedFile::open("static/preparation.html")
+}
+
+#[get("/contact")]
+fn contact() -> io::Result<NamedFile> {
+    NamedFile::open("static/contact.html")
+}
+
+#[get("/services")]
+fn services() -> io::Result<NamedFile> {
+    NamedFile::open("static/services.html")
+}
+
+#[get("/<file..>")]
+fn files(file: PathBuf) -> Option<NamedFile> {
+    NamedFile::open(Path::new("static/").join(file)).ok()
+}
+
 
 fn rocket() -> rocket::Rocket {
-    rocket::ignite()
-        .mount("/", routes![index, hello, map])
-        .attach(Template::fairing())
-        .catch(errors![not_found])
+    rocket::ignite().mount("/", routes![index, about, rebuilding, preparation, contact, services, files])
 }
 
 fn main() {
